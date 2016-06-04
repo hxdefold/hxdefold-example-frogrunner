@@ -1,7 +1,7 @@
 typedef LevelData = {
-    speed:Float,
-    gridw:Float,
-    spawns:lua.Table<Int,Hash>,
+    @property(6) var speed:Float;
+    var gridw:Float;
+    var spawns:lua.Table<Int,Hash>;
 }
 
 class Controller extends Component<LevelData> {
@@ -9,13 +9,7 @@ class Controller extends Component<LevelData> {
     static var platform_heights = [100, 200, 350];
     static var coins = 3;
 
-    public function new() {
-        Go.property("speed", 6);
-        super();
-    }
-
     override function init(data:LevelData) {
-        data.speed = 6; // TODO: wtf go.property doesn't work
         Msg.post("ground/controller#script", Messages.SetSpeed, {speed: data.speed});
         data.gridw = 0;
         data.spawns = lua.Table.create();

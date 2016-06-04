@@ -565,7 +565,6 @@ Controller.new = function()
 end
 
 Controller.super = function(self) 
-  go.property("speed",6);
   Component.super(self);
 end
 _hx_exports["Controller"] = Controller
@@ -573,7 +572,6 @@ Controller.__name__ = true
 
 Controller.prototype = _hx_anon(
   'init', function(self,data) 
-    data.speed = 6;
     msg.post("ground/controller#script",Messages.SetSpeed,_hx_o({__fields__={speed=true},speed=data.speed}));
     data.gridw = 0;
     data.spawns = ({});
