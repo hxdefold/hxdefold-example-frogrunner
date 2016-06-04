@@ -576,7 +576,7 @@ Controller.prototype = _hx_anon(
     data.speed = 6;
     msg.post("ground/controller#script",Messages.SetSpeed,_hx_o({__fields__={speed=true},speed=data.speed}));
     data.gridw = 0;
-    data.spawns = {}
+    data.spawns = ({});
   end,
   'update', function(self,data,dt) 
     (function() return (function() 
@@ -597,7 +597,7 @@ Controller.prototype = _hx_anon(
           f = "#platform_long_factory";
           coins = (coins) * (2);
         end;
-        local p = factory.create(f,vmath.vector3(1600,h,0),nil,{},0.6);
+        local p = factory.create(f,vmath.vector3(1600,h,0),nil,({}),0.6);
         msg.post(p,Messages.SetSpeed,_hx_o({__fields__={speed=true},speed=data.speed}));
         msg.post(p,Platform.CreateCoinsMessage,_hx_o({__fields__={coins=true},coins=coins}));
         _G.table.insert(data.spawns,p);
@@ -620,7 +620,7 @@ Controller.prototype = _hx_anon(
       lua.PairTools.ipairsEach(data.spawns,function(i1,p1) 
         go.delete(p1);
       end);
-      data.spawns = {}
+      data.spawns = ({});
     end;
   end
   ,'__class__',  Controller
@@ -852,7 +852,7 @@ Platform.__name__ = true
 Platform.prototype = _hx_anon(
   'init', function(self,data) 
     data.speed = 9;
-    data.coins = {}
+    data.coins = ({});
   end,
   'final', function(self,data) 
     lua.PairTools.ipairsEach(data.coins,function(i,p) 
