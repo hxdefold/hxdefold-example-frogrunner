@@ -108,8 +108,9 @@ local function _hx_apply_self(self, f, ...)
 end
 
 local _hx_exports = _G
-local Array = _hx_empty() local Component = _hx_empty() local Coin = _hx_empty() local Controller = _hx_empty() local Date = _hx_empty() local Ground = _hx_empty() local Hero = _hx_empty() local Math = _hx_empty() local _Message = {}
-_Message.Message_Impl_ = _hx_empty() local Messages = _hx_empty() local Platform = _hx_empty() local Reflect = _hx_empty() local String = _hx_empty() local Std = _hx_empty() local StringBuf = _hx_empty() local haxe = {}
+local Array = _hx_empty() local Component = _hx_empty() local Coin = _hx_empty() local Controller = _hx_empty() local Date = _hx_empty() local Ground = _hx_empty() local Hero = _hx_empty() local Math = _hx_empty() local Messages = _hx_empty() local Platform = _hx_empty() local Reflect = _hx_empty() local String = _hx_empty() local Std = _hx_empty() local StringBuf = _hx_empty() local defold = {}
+defold._Message = {}
+defold._Message.Message_Impl_ = _hx_empty() local haxe = {}
 haxe.ds = {}
 haxe.ds.ArraySort = _hx_empty() haxe.io = {}
 haxe.io.Eof = _hx_empty() local lua = {}
@@ -573,9 +574,9 @@ Controller.__name__ = true
 Controller.prototype = _hx_anon(
   'init', function(self,data) 
     data.speed = 6;
+    msg.post("ground/controller#script",Messages.SetSpeed,_hx_o({__fields__={speed=true},speed=data.speed}));
     data.gridw = 0;
     data.spawns = {}
-    msg.post("ground/controller#script",Messages.SetSpeed,_hx_o({__fields__={speed=true},speed=data.speed}));
   end,
   'update', function(self,data,dt) 
     (function() return (function() 
@@ -829,14 +830,6 @@ Math.new = {}
 Math.__name__ = true
 Math.isNaN = function(f) 
   do return (f) ~= (f) end;
-end
-
-
-_Message.Message_Impl_.new = {}
-_Message.Message_Impl_.__name__ = true
-_Message.Message_Impl_._new = function(s) 
-  local this1 = hash(s);
-  do return this1 end;
 end
 
 
@@ -1115,6 +1108,14 @@ StringBuf.prototype = _hx_anon(
   end
   ,'__class__',  StringBuf
 )
+
+defold._Message.Message_Impl_.new = {}
+defold._Message.Message_Impl_.__name__ = true
+defold._Message.Message_Impl_._new = function(s) 
+  local this1 = hash(s);
+  do return this1 end;
+end
+
 
 haxe.ds.ArraySort.new = {}
 haxe.ds.ArraySort.__name__ = true

@@ -16,9 +16,9 @@ class Controller extends Component<LevelData> {
 
     override function init(data:LevelData) {
         data.speed = 6; // TODO: wtf go.property doesn't work
+        Msg.post("ground/controller#script", Messages.SetSpeed, {speed: data.speed});
         data.gridw = 0;
         data.spawns = lua.Table.create();
-        Msg.post("ground/controller#script", Messages.SetSpeed, {speed: data.speed});
     }
 
     override function update(data:LevelData, dt:Float) {
@@ -33,7 +33,7 @@ class Controller extends Component<LevelData> {
                 var coins = coins;
                 if (Math.random() > 0.5) {
                     f = "#platform_long_factory";
-                    coins *= 2;
+                    coins *= 2; // Twice the number of coins on long platforms
                 }
                 var p = Factory.create(f, Vmath.vector3(1600, h, 0), null, lua.Table.create(), 0.6);
                 Msg.post(p, Messages.SetSpeed, {speed: data.speed});
