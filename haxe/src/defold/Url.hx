@@ -1,3 +1,3 @@
 package defold;
 
-extern class Url {}
+typedef Url = String
