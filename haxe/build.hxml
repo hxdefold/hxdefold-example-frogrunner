@@ -1,0 +1,5 @@
+-cp src
+-lua out/main.lua
+--macro include("", true, ["ComponentMacro"], ["src"])
+--macro ComponentMacro.use()
+-D luajit

@@ -1,0 +1,15 @@
+images {
+  image: "/level/images/ground01.png"
+}
+images {
+  image: "/level/images/ground02.png"
+}
+images {
+  image: "/level/images/rock_planks.png"
+}
+images {
+  image: "/level/images/spikes.png"
+}
+images {
+  image: "/level/images/coin.png"
+}

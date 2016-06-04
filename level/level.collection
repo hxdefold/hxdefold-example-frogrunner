@@ -1,0 +1,35 @@
+name: "default"
+instances {
+  id: "hero"
+  prototype: "/hero/hero.go"
+  position {
+    x: 149.96107
+    y: 140.58852
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ground"
+  collection: "/level/ground.collection"
+  position {
+    y: 58.760124
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "controller"
+  data: "components {\n  id: \"script\"\n  component: \"/haxe/out/components/Controller.script\"\n  position {\n    x: 0.0\n    y: 0.0\n    z: 0.0\n  }\n  rotation {\n    x: 0.0\n    y: 0.0\n    z: 0.0\n    w: 1.0\n  }\n}\nembedded_components {\n  id: \"platform_factory\"\n  type: \"factory\"\n  data: \"prototype: \\\"/level/objects/platform.go\\\"\\n\"\n  position {\n    x: 0.0\n    y: 0.0\n    z: 0.0\n  }\n  rotation {\n    x: 0.0\n    y: 0.0\n    z: 0.0\n    w: 1.0\n  }\n}\nembedded_components {\n  id: \"platform_long_factory\"\n  type: \"factory\"\n  data: \"prototype: \\\"/level/objects/platform_long.go\\\"\\n\"\n  position {\n    x: 0.0\n    y: 0.0\n    z: 0.0\n  }\n  rotation {\n    x: 0.0\n    y: 0.0\n    z: 0.0\n    w: 1.0\n  }\n}\n"
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
