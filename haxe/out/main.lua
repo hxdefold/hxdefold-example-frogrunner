@@ -728,9 +728,9 @@ Hero.prototype = _hx_anon(
     if (not data.ground_contact) then 
       data.velocity = (data.velocity) + (gravity);
     end;
-    local _this = go.get_position();
-    local other = (data.velocity) * (dt);
-    go.set_position((_this) + (other));
+    local a = go.get_position();
+    local b = (data.velocity) * (dt);
+    go.set_position((a) + (b));
     self:update_animation(data);
     data.correction = vmath.vector3();
     data.ground_contact = false;
@@ -757,16 +757,16 @@ Hero.prototype = _hx_anon(
     local proj = vmath.dot(data.correction,normal);
     local comp = (normal) * ((distance) - (proj));
     data.correction = (data.correction) + (comp);
-    local _this = go.get_position();
-    go.set_position((_this) + (comp));
+    local a = go.get_position();
+    go.set_position((a) + (comp));
     if ((normal.y) > (0.7)) then 
       data.ground_contact = true;
     end;
     proj = vmath.dot(data.velocity,normal);
     if ((proj) < (0)) then 
       
-      local other = (normal) * (proj);
-      data.velocity = (data.velocity) - (other);
+      local b = (normal) * (proj);
+      data.velocity = (data.velocity) - (b);
     end;
   end,
   'on_message', function(self,data,message_id,message,sender) 

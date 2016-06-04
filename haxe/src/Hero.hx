@@ -33,10 +33,10 @@ class Hero extends Component<HeroData> {
 
         if (!data.ground_contact)
             // Apply gravity if there's no ground contact
-            data.velocity = data.velocity.add(gravity);
+            data.velocity += gravity;
 
         // apply velocity to the player character
-        Go.set_position(Go.get_position().add(data.velocity.mul(dt)));
+        Go.set_position(Go.get_position() + data.velocity * dt);
 
         update_animation(data);
 
@@ -66,11 +66,11 @@ class Hero extends Component<HeroData> {
         // (the correction vector is the 0-vector for the first contact point)
         var proj = Vmath.dot(data.correction, normal);
         // calculate the compensation we need to make for this contact point
-        var comp = normal.mul(distance - proj);
+        var comp = normal * (distance - proj);
         // add it to the correction vector
-        data.correction = data.correction.add(comp);
+        data.correction = data.correction + comp;
         // apply the compensation to the player character
-        Go.set_position(Go.get_position().add(comp));
+        Go.set_position(Go.get_position() + comp);
         // check if the normal points enough up to consider the player standing on the ground
         // (0.7 is roughly equal to 45 degrees deviation from pure vertical direction)
         if (normal.y > 0.7)
@@ -80,7 +80,7 @@ class Hero extends Component<HeroData> {
         // if the projection is negative, it means that some of the velocity points towards the contact point
         if (proj < 0)
             // remove that component in that case
-            data.velocity = data.velocity.sub(normal.mul(proj));
+            data.velocity = data.velocity - normal * proj;
     }
 
     override function on_message<T>(data:HeroData, message_id:Message<T>, message:T, sender:Url) {
