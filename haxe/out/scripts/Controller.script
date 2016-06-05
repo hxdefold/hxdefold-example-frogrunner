@@ -3,25 +3,17 @@ require "haxe.out.main"
 
 go.property("speed", 6)
 
-local comp = Controller.new()
+local script = Controller.new()
 
-function init(self)
-    comp:init(self)
+function init(data)
+	script:init(data)
 end
 
-function update(self, dt)
-    comp:update(self, dt)
+function update(data, dt)
+	script:update(data, dt)
 end
 
-function final(self)
-    comp:final(self)
+function on_message(data, message_id, message, sender)
+	script:on_message(data, message_id, message, sender)
 end
 
-function on_input(self, action_id, action)
-    comp:on_input(self, action_id, action)
-end
-
-function on_message(self, message_id, message, sender)
-    comp:on_message(self, message_id, message, sender)
-end
-                        
