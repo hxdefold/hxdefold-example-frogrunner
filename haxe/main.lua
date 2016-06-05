@@ -1751,45 +1751,61 @@ Messages.TriggerResponse = (function()
   _hx_16 = this1;
   return _hx_16
 end )()
-Messages.StartAnimation = (function() 
+Messages.SpineAnimationDone = (function() 
   local _hx_17
   
-  local this1 = hash("start_animation");
+  local this1 = hash("spine_animation_done");
   
   _hx_17 = this1;
   return _hx_17
 end )()
-Messages.Reset = (function() 
+Messages.SpineEvent = (function() 
   local _hx_18
   
-  local this1 = hash("reset");
+  local this1 = hash("spine_event");
   
   _hx_18 = this1;
   return _hx_18
 end )()
-Messages.DeleteSpawn = (function() 
+Messages.StartAnimation = (function() 
   local _hx_19
   
-  local this1 = hash("delete_spawn");
+  local this1 = hash("start_animation");
   
   _hx_19 = this1;
   return _hx_19
 end )()
-Messages.SetSpeed = (function() 
+Messages.Reset = (function() 
   local _hx_20
   
-  local this1 = hash("set_speed");
+  local this1 = hash("reset");
   
   _hx_20 = this1;
   return _hx_20
 end )()
-Platform.CreateCoinsMessage = (function() 
+Messages.DeleteSpawn = (function() 
   local _hx_21
   
-  local this1 = hash("create_coins");
+  local this1 = hash("delete_spawn");
   
   _hx_21 = this1;
   return _hx_21
+end )()
+Messages.SetSpeed = (function() 
+  local _hx_22
+  
+  local this1 = hash("set_speed");
+  
+  _hx_22 = this1;
+  return _hx_22
+end )()
+Platform.CreateCoinsMessage = (function() 
+  local _hx_23
+  
+  local this1 = hash("create_coins");
+  
+  _hx_23 = this1;
+  return _hx_23
 end )()
 lua.Boot.hiddenFields = _hx_tab_array({[0]="__id__", "hx__closures", "super", "prototype", "__fields__", "__ifields__", "__class__", "__properties__" }, 8)
 do

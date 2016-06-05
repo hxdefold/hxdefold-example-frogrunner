@@ -23,6 +23,10 @@ class Messages {
     static var RayCastResponse(default,never) = new Message<RayCastResponseData>("ray_cast_response");
     static var TriggerResponse(default,never) = new Message<{other_id:Hash, enter:Bool, group:Hash}>("trigger_response");
 
+    // spine
+    static var SpineAnimationDone(default,never) = new Message<{animation_id:Hash, playback:Playback}>("spine_animation_done");
+    static var SpineEvent(default,never) = new Message<SpineEventData>("spine_event");
+
     // custom
     static var StartAnimation(default,never) = new Message<{delay:Float}>("start_animation");
     static var Reset(default,never) = new Message<Void>("reset");
@@ -66,4 +70,14 @@ typedef RayCastResponseData = {
     id:Hash,
     group:Hash,
     request_id:Int,
+}
+
+typedef SpineEventData = {
+    event_id:Hash,
+    animation_id:Hash,
+    t:Float,
+    blend_weight:Float,
+    integer:Int,
+    float:Float,
+    string:Hash,
 }
