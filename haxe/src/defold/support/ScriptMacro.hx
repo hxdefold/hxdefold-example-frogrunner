@@ -12,8 +12,9 @@ class ScriptMacro {
     static function use() {
         Context.onGenerate(function(types) {
             var out = Compiler.getOutput();
-            var outDir = Path.directory(out) + "/components";
+            var outDir = Path.directory(out) + "/scripts";
             var relPath = "../" + Path.withoutDirectory(out);
+            deleteRec(outDir);
             sys.FileSystem.createDirectory(outDir);
             for (type in types) {
                 switch (type) {
@@ -56,6 +57,16 @@ end
                 }
             }
         });
+    }
+
+    static function deleteRec(path:String) {
+        if (sys.FileSystem.isDirectory(path)) {
+            for (file in sys.FileSystem.readDirectory(path))
+                deleteRec('$path/$file');
+            sys.FileSystem.deleteDirectory(path);
+        } else {
+            sys.FileSystem.deleteFile(path);
+        }
     }
 
     static function getProperties(type:Type, pos:Position):Array<{name:String, value:String}> {

@@ -512,15 +512,17 @@ end
 defold.support.Script.__name__ = true
 
 defold.support.Script.prototype = _hx_anon(
-  'final', function(self,self) 
-  end,
   'init', function(self,self) 
+  end,
+  'final', function(self,self) 
   end,
   'update', function(self,self,dt) 
   end,
   'on_message', function(self,self,message_id,message,sender) 
   end,
   'on_input', function(self,self,action_id,action) 
+  end,
+  'on_reload', function(self,self) 
   end
   ,'__class__',  defold.support.Script
 )
