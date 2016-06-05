@@ -1,7 +1,5 @@
 package defold.support;
 
-typedef InputAction = Dynamic;
-
 class Script<T:{}> {
     function new() {}
     function init(self:T) {}

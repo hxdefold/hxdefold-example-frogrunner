@@ -3,7 +3,7 @@ typedef PlatformData = {
     coins:lua.Table<Int,Hash>,
 }
 
-class Platform extends Script<PlatformData> {
+class Platform extends defold.support.Script<PlatformData> {
     override function init(data:PlatformData) {
         data.speed = 9; // Default speed
         data.coins = lua.Table.create();

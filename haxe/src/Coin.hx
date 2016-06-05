@@ -2,7 +2,7 @@ typedef CoinData = {
     collected:Bool,
 }
 
-class Coin extends Script<CoinData> {
+class Coin extends defold.support.Script<CoinData> {
     override function init(data:CoinData) {
         data.collected = false;
     }

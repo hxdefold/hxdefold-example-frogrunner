@@ -1,3 +1,5 @@
+import defold.support.InputAction;
+
 typedef HeroData = {
     position:Vector3,
     velocity:Vector3,
@@ -6,7 +8,7 @@ typedef HeroData = {
     anim:Hash,
 }
 
-class Hero extends Script<HeroData> {
+class Hero extends defold.support.Script<HeroData> {
     // gravity pulling the player down in pixel units/sˆ2
     var gravity = -20;
 
@@ -107,7 +109,7 @@ class Hero extends Script<HeroData> {
         }
     }
 
-    override function on_input(data:HeroData, action_id:Hash, action:Dynamic) {
+    override function on_input(data:HeroData, action_id:Hash, action:InputAction) {
         if (action_id == hash("jump") || action_id == hash("touch")) {
             if (action.pressed)
                 jump(data);
