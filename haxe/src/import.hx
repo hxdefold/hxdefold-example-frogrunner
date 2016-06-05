@@ -1,2 +1,2 @@
 import defold.*;
-import defold.Hash.hash;
+import Defold.hash;

@@ -743,12 +743,12 @@ Hero.prototype = _hx_anon(
   end,
   'update_animation', function(self,data) 
     if (data.ground_contact) then 
-      self:play_animation(data,hash("run_right"));
+      self:play_animation(data,_G.hash("run_right"));
     else
       if ((data.velocity.y) > (0)) then 
-        self:play_animation(data,hash("jump_right"));
+        self:play_animation(data,_G.hash("jump_right"));
       else
-        self:play_animation(data,hash("fall_right"));
+        self:play_animation(data,_G.hash("fall_right"));
       end;
     end;
   end,
@@ -769,22 +769,21 @@ Hero.prototype = _hx_anon(
     end;
   end,
   'on_message', function(self,data,message_id,message,sender) 
-    local tmp = message_id;
-    if (tmp) == Messages.ContactPointResponse then 
-      if ((message.group) == (hash("danger"))) then 
+    if (message_id) == Messages.ContactPointResponse then 
+      if ((message.group) == (_G.hash("danger"))) then 
         
-        self:play_animation(data,hash("die_right"));
+        self:play_animation(data,_G.hash("die_right"));
         msg.post("#collisionobject",Messages.Disable);
         go.animate(".","euler.z",go.PLAYBACK_ONCE_FORWARD,160,go.EASING_LINEAR,0.7);
         go.animate(".","position.y",go.PLAYBACK_ONCE_FORWARD,(go.get_position().y) - (200),go.EASING_INSINE,0.5,0.2,function() 
           msg.post("controller#script",Messages.Reset);
         end);
       else
-        if ((message.group) == (hash("geometry"))) then 
+        if ((message.group) == (_G.hash("geometry"))) then 
           self:handle_geometry_contact(data,message.normal,message.distance);
         end;
       end;
-    elseif (tmp) == Messages.Reset then 
+    elseif (message_id) == Messages.Reset then 
       
       data.velocity = vmath.vector3(0,0,0);
       data.correction = vmath.vector3();
@@ -796,7 +795,7 @@ Hero.prototype = _hx_anon(
     end;
   end,
   'on_input', function(self,data,action_id,action) 
-    if (((action_id) == (hash("jump"))) or ((action_id) == (hash("touch")))) then 
+    if (((action_id) == (_G.hash("jump"))) or ((action_id) == (_G.hash("touch")))) then 
       
       if (action.pressed) then 
         self:jump(data);
@@ -1105,7 +1104,7 @@ StringBuf.prototype = _hx_anon(
 defold._Message.Message_Impl_.new = {}
 defold._Message.Message_Impl_.__name__ = true
 defold._Message.Message_Impl_._new = function(s) 
-  local this1 = hash(s);
+  local this1 = _G.hash(s);
   do return this1 end;
 end
 
@@ -1626,7 +1625,7 @@ Ground.pieces = _hx_tab_array({[0]="ground0", "ground1", "ground2", "ground3", "
 Messages.Exit = (function() 
   local _hx_1
   
-  local this1 = hash("exit");
+  local this1 = _G.hash("exit");
   
   _hx_1 = this1;
   return _hx_1
@@ -1634,7 +1633,7 @@ end )()
 Messages.Reboot = (function() 
   local _hx_2
   
-  local this1 = hash("reboot");
+  local this1 = _G.hash("reboot");
   
   _hx_2 = this1;
   return _hx_2
@@ -1642,7 +1641,7 @@ end )()
 Messages.SetUpdateFrequency = (function() 
   local _hx_3
   
-  local this1 = hash("set_update_frequency");
+  local this1 = _G.hash("set_update_frequency");
   
   _hx_3 = this1;
   return _hx_3
@@ -1650,7 +1649,7 @@ end )()
 Messages.StartRecord = (function() 
   local _hx_4
   
-  local this1 = hash("start_record");
+  local this1 = _G.hash("start_record");
   
   _hx_4 = this1;
   return _hx_4
@@ -1658,7 +1657,7 @@ end )()
 Messages.StopRecord = (function() 
   local _hx_5
   
-  local this1 = hash("stop_record");
+  local this1 = _G.hash("stop_record");
   
   _hx_5 = this1;
   return _hx_5
@@ -1666,7 +1665,7 @@ end )()
 Messages.ToggleProfile = (function() 
   local _hx_6
   
-  local this1 = hash("toggle_profile");
+  local this1 = _G.hash("toggle_profile");
   
   _hx_6 = this1;
   return _hx_6
@@ -1674,7 +1673,7 @@ end )()
 Messages.AcquireInputFocus = (function() 
   local _hx_7
   
-  local this1 = hash("acquire_input_focus");
+  local this1 = _G.hash("acquire_input_focus");
   
   _hx_7 = this1;
   return _hx_7
@@ -1682,7 +1681,7 @@ end )()
 Messages.Disable = (function() 
   local _hx_8
   
-  local this1 = hash("disable");
+  local this1 = _G.hash("disable");
   
   _hx_8 = this1;
   return _hx_8
@@ -1690,7 +1689,7 @@ end )()
 Messages.Enable = (function() 
   local _hx_9
   
-  local this1 = hash("enable");
+  local this1 = _G.hash("enable");
   
   _hx_9 = this1;
   return _hx_9
@@ -1698,7 +1697,7 @@ end )()
 Messages.ReleaseInputFocus = (function() 
   local _hx_10
   
-  local this1 = hash("release_input_focus");
+  local this1 = _G.hash("release_input_focus");
   
   _hx_10 = this1;
   return _hx_10
@@ -1706,7 +1705,7 @@ end )()
 Messages.SetParent = (function() 
   local _hx_11
   
-  local this1 = hash("set_parent");
+  local this1 = _G.hash("set_parent");
   
   _hx_11 = this1;
   return _hx_11
@@ -1714,7 +1713,7 @@ end )()
 Messages.ApplyForce = (function() 
   local _hx_12
   
-  local this1 = hash("apply_force");
+  local this1 = _G.hash("apply_force");
   
   _hx_12 = this1;
   return _hx_12
@@ -1722,7 +1721,7 @@ end )()
 Messages.CollisionResponse = (function() 
   local _hx_13
   
-  local this1 = hash("collision_response");
+  local this1 = _G.hash("collision_response");
   
   _hx_13 = this1;
   return _hx_13
@@ -1730,7 +1729,7 @@ end )()
 Messages.ContactPointResponse = (function() 
   local _hx_14
   
-  local this1 = hash("contact_point_response");
+  local this1 = _G.hash("contact_point_response");
   
   _hx_14 = this1;
   return _hx_14
@@ -1738,7 +1737,7 @@ end )()
 Messages.RayCastResponse = (function() 
   local _hx_15
   
-  local this1 = hash("ray_cast_response");
+  local this1 = _G.hash("ray_cast_response");
   
   _hx_15 = this1;
   return _hx_15
@@ -1746,7 +1745,7 @@ end )()
 Messages.TriggerResponse = (function() 
   local _hx_16
   
-  local this1 = hash("trigger_response");
+  local this1 = _G.hash("trigger_response");
   
   _hx_16 = this1;
   return _hx_16
@@ -1754,7 +1753,7 @@ end )()
 Messages.SpineAnimationDone = (function() 
   local _hx_17
   
-  local this1 = hash("spine_animation_done");
+  local this1 = _G.hash("spine_animation_done");
   
   _hx_17 = this1;
   return _hx_17
@@ -1762,7 +1761,7 @@ end )()
 Messages.SpineEvent = (function() 
   local _hx_18
   
-  local this1 = hash("spine_event");
+  local this1 = _G.hash("spine_event");
   
   _hx_18 = this1;
   return _hx_18
@@ -1770,7 +1769,7 @@ end )()
 Messages.AcquireCameraFocus = (function() 
   local _hx_19
   
-  local this1 = hash("acquire_camera_focus");
+  local this1 = _G.hash("acquire_camera_focus");
   
   _hx_19 = this1;
   return _hx_19
@@ -1778,7 +1777,7 @@ end )()
 Messages.ReleaseCameraFocus = (function() 
   local _hx_20
   
-  local this1 = hash("release_camera_focus");
+  local this1 = _G.hash("release_camera_focus");
   
   _hx_20 = this1;
   return _hx_20
@@ -1786,7 +1785,7 @@ end )()
 Messages.SetCamera = (function() 
   local _hx_21
   
-  local this1 = hash("set_camera");
+  local this1 = _G.hash("set_camera");
   
   _hx_21 = this1;
   return _hx_21
@@ -1794,7 +1793,7 @@ end )()
 Messages.StartAnimation = (function() 
   local _hx_22
   
-  local this1 = hash("start_animation");
+  local this1 = _G.hash("start_animation");
   
   _hx_22 = this1;
   return _hx_22
@@ -1802,7 +1801,7 @@ end )()
 Messages.Reset = (function() 
   local _hx_23
   
-  local this1 = hash("reset");
+  local this1 = _G.hash("reset");
   
   _hx_23 = this1;
   return _hx_23
@@ -1810,7 +1809,7 @@ end )()
 Messages.DeleteSpawn = (function() 
   local _hx_24
   
-  local this1 = hash("delete_spawn");
+  local this1 = _G.hash("delete_spawn");
   
   _hx_24 = this1;
   return _hx_24
@@ -1818,7 +1817,7 @@ end )()
 Messages.SetSpeed = (function() 
   local _hx_25
   
-  local this1 = hash("set_speed");
+  local this1 = _G.hash("set_speed");
   
   _hx_25 = this1;
   return _hx_25
@@ -1826,7 +1825,7 @@ end )()
 Platform.CreateCoinsMessage = (function() 
   local _hx_26
   
-  local this1 = hash("create_coins");
+  local this1 = _G.hash("create_coins");
   
   _hx_26 = this1;
   return _hx_26
