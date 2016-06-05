@@ -1,6 +1,6 @@
 -cp src
 -cp defold/src
 -lua main.lua
---macro include("", true, null, ["src"])
+--macro include("", true, null, ["src", "defold/src"])
 --macro defold.support.ScriptMacro.use("..")
 -D luajit
