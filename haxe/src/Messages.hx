@@ -27,6 +27,11 @@ class Messages {
     static var SpineAnimationDone(default,never) = new Message<{animation_id:Hash, playback:Playback}>("spine_animation_done");
     static var SpineEvent(default,never) = new Message<SpineEventData>("spine_event");
 
+    // camera
+    static var AcquireCameraFocus(default,never) = new Message<Void>("acquire_camera_focus");
+    static var ReleaseCameraFocus(default,never) = new Message<Void>("release_camera_focus");
+    static var SetCamera(default,never) = new Message<SetCameraData>("set_camera");
+
     // custom
     static var StartAnimation(default,never) = new Message<{delay:Float}>("start_animation");
     static var Reset(default,never) = new Message<Void>("reset");
@@ -80,4 +85,11 @@ typedef SpineEventData = {
     integer:Int,
     float:Float,
     string:Hash,
+}
+
+typedef SetCameraData = {
+    aspect_ratio:Float,
+    fov:Float,
+    near_z:Float,
+    far_z:Float,
 }
