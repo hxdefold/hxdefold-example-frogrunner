@@ -1,3 +1,5 @@
+package defold.support;
+
 #if macro
 import haxe.io.Path;
 import haxe.macro.Compiler;
@@ -6,7 +8,7 @@ import haxe.macro.Context;
 import haxe.macro.Type;
 using haxe.macro.Tools;
 
-class ComponentMacro {
+class ScriptMacro {
     static function use() {
         Context.onGenerate(function(types) {
             var out = Compiler.getOutput();
@@ -15,7 +17,7 @@ class ComponentMacro {
             sys.FileSystem.createDirectory(outDir);
             for (type in types) {
                 switch (type) {
-                    case TInst(_.get() => cl = {superClass: {t: _.get() => {pack: [], name: "Component"}, params: [tData]}}, _):
+                    case TInst(_.get() => cl = {superClass: {t: _.get() => {pack: ["defold","support"], name: "Script"}, params: [tData]}}, _):
                         var props = getProperties(tData, cl.pos);
                         var name = cl.name;
                         cl.meta.add(":expose", [], cl.pos);

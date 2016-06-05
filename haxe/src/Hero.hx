@@ -6,7 +6,7 @@ typedef HeroData = {
     anim:Hash,
 }
 
-class Hero extends Component<HeroData> {
+class Hero extends Script<HeroData> {
     // gravity pulling the player down in pixel units/sˆ2
     var gravity = -20;
 

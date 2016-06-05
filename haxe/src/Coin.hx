@@ -2,7 +2,7 @@ typedef CoinData = {
     collected:Bool,
 }
 
-class Coin extends Component<CoinData> {
+class Coin extends Script<CoinData> {
     override function init(data:CoinData) {
         data.collected = false;
     }

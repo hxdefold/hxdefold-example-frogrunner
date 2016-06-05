@@ -108,8 +108,9 @@ local function _hx_apply_self(self, f, ...)
 end
 
 local _hx_exports = _G
-local Array = _hx_empty() local Component = _hx_empty() local Coin = _hx_empty() local Controller = _hx_empty() local Date = _hx_empty() local Ground = _hx_empty() local Hero = _hx_empty() local Math = _hx_empty() local Messages = _hx_empty() local Platform = _hx_empty() local Reflect = _hx_empty() local String = _hx_empty() local Std = _hx_empty() local StringBuf = _hx_empty() local defold = {}
-defold._Message = {}
+local Array = _hx_empty() local defold = {}
+defold.support = {}
+defold.support.Script = _hx_empty() local Coin = _hx_empty() local Controller = _hx_empty() local Date = _hx_empty() local Ground = _hx_empty() local Hero = _hx_empty() local Math = _hx_empty() local Messages = _hx_empty() local Platform = _hx_empty() local Reflect = _hx_empty() local String = _hx_empty() local Std = _hx_empty() local StringBuf = _hx_empty() defold._Message = {}
 defold._Message.Message_Impl_ = _hx_empty() local haxe = {}
 haxe.ds = {}
 haxe.ds.ArraySort = _hx_empty() haxe.io = {}
@@ -500,17 +501,17 @@ Array.prototype = _hx_anon(
   ,'__class__',  Array
 )
 
-Component.new = function() 
-  local self = _hx_new(Component.prototype)
-  Component.super(self)
+defold.support.Script.new = function() 
+  local self = _hx_new(defold.support.Script.prototype)
+  defold.support.Script.super(self)
   return self
 end
 
-Component.super = function(self) 
+defold.support.Script.super = function(self) 
 end
-Component.__name__ = true
+defold.support.Script.__name__ = true
 
-Component.prototype = _hx_anon(
+defold.support.Script.prototype = _hx_anon(
   'final', function(self,self) 
   end,
   'init', function(self,self) 
@@ -521,7 +522,7 @@ Component.prototype = _hx_anon(
   end,
   'on_input', function(self,self,action_id,action) 
   end
-  ,'__class__',  Component
+  ,'__class__',  defold.support.Script
 )
 
 Coin.new = function() 
@@ -531,7 +532,7 @@ Coin.new = function()
 end
 
 Coin.super = function(self) 
-  Component.super(self);
+  defold.support.Script.super(self);
 end
 _hx_exports["Coin"] = Coin
 Coin.__name__ = true
@@ -555,8 +556,8 @@ Coin.prototype = _hx_anon(
   end
   ,'__class__',  Coin
 )
-Coin.__super__ = Component
-setmetatable(Coin.prototype,{__index=Component.prototype})
+Coin.__super__ = defold.support.Script
+setmetatable(Coin.prototype,{__index=defold.support.Script.prototype})
 
 Controller.new = function() 
   local self = _hx_new(Controller.prototype)
@@ -565,7 +566,7 @@ Controller.new = function()
 end
 
 Controller.super = function(self) 
-  Component.super(self);
+  defold.support.Script.super(self);
 end
 _hx_exports["Controller"] = Controller
 Controller.__name__ = true
@@ -623,8 +624,8 @@ Controller.prototype = _hx_anon(
   end
   ,'__class__',  Controller
 )
-Controller.__super__ = Component
-setmetatable(Controller.prototype,{__index=Component.prototype})
+Controller.__super__ = defold.support.Script
+setmetatable(Controller.prototype,{__index=defold.support.Script.prototype})
 
 Date.new = {}
 Date.__name__ = true
@@ -661,7 +662,7 @@ Ground.new = function()
 end
 
 Ground.super = function(self) 
-  Component.super(self);
+  defold.support.Script.super(self);
 end
 _hx_exports["Ground"] = Ground
 Ground.__name__ = true
@@ -693,8 +694,8 @@ Ground.prototype = _hx_anon(
   end
   ,'__class__',  Ground
 )
-Ground.__super__ = Component
-setmetatable(Ground.prototype,{__index=Component.prototype})
+Ground.__super__ = defold.support.Script
+setmetatable(Ground.prototype,{__index=defold.support.Script.prototype})
 
 Hero.new = function() 
   local self = _hx_new(Hero.prototype)
@@ -705,7 +706,7 @@ end
 Hero.super = function(self) 
   self.jump_takeoff_speed = 900;
   self.gravity = -20;
-  Component.super(self);
+  defold.support.Script.super(self);
 end
 _hx_exports["Hero"] = Hero
 Hero.__name__ = true
@@ -816,8 +817,8 @@ Hero.prototype = _hx_anon(
   end
   ,'__class__',  Hero
 )
-Hero.__super__ = Component
-setmetatable(Hero.prototype,{__index=Component.prototype})
+Hero.__super__ = defold.support.Script
+setmetatable(Hero.prototype,{__index=defold.support.Script.prototype})
 Math.__name__ = true
 
 Math.new = {}
@@ -838,7 +839,7 @@ Platform.new = function()
 end
 
 Platform.super = function(self) 
-  Component.super(self);
+  defold.support.Script.super(self);
 end
 _hx_exports["Platform"] = Platform
 Platform.__name__ = true
@@ -886,8 +887,8 @@ Platform.prototype = _hx_anon(
   end
   ,'__class__',  Platform
 )
-Platform.__super__ = Component
-setmetatable(Platform.prototype,{__index=Component.prototype})
+Platform.__super__ = defold.support.Script
+setmetatable(Platform.prototype,{__index=defold.support.Script.prototype})
 
 Reflect.new = {}
 Reflect.__name__ = true

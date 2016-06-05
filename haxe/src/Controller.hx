@@ -4,7 +4,7 @@ typedef LevelData = {
     var spawns:lua.Table<Int,Hash>;
 }
 
-class Controller extends Component<LevelData> {
+class Controller extends Script<LevelData> {
     static var grid = 460;
     static var platform_heights = [100, 200, 350];
     static var coins = 3;

@@ -1,6 +1,8 @@
+package defold.support;
+
 typedef InputAction = Dynamic;
 
-class Component<T:{}> {
+class Script<T:{}> {
     function new() {}
     function final(self:T) {}
     function init(self:T) {}

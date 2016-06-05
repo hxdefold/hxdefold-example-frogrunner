@@ -2,7 +2,7 @@ typedef GroundData = {
     speed:Float,
 }
 
-class Ground extends Component<GroundData> {
+class Ground extends Script<GroundData> {
     static var pieces = ["ground0", "ground1", "ground2", "ground3", "ground4", "ground5", "ground6"];
 
     override function init(data:GroundData) {
