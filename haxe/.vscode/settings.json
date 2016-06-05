@@ -1,5 +1,5 @@
 {
     "haxe.displayConfigurations": [
-        ["-D", "no-copt", "-cp", "src", "-lua", "main.lua", "-D", "luajit"]
+        ["-D", "no-copt", "-cp", "src", "-cp", "defold/src", "-lua", "main.lua", "-D", "luajit"]
     ]
 }
