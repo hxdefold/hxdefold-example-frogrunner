@@ -37,6 +37,9 @@ class DefoldMessages {
     static var AcquireCameraFocus(default,never) = new Message<Void>("acquire_camera_focus");
     static var ReleaseCameraFocus(default,never) = new Message<Void>("release_camera_focus");
     static var SetCamera(default,never) = new Message<SetCameraData>("set_camera");
+
+    // render
+    static var ClearColor(default,never) = new Message<{color:Vector4}>("clear_color");
 }
 
 typedef RebootData = {
