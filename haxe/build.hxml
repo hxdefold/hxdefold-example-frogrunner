@@ -1,5 +1,6 @@
 -cp src
--lua out/main.lua
+-cp defold/src
+-lua main.lua
 --macro include("", true, null, ["src"])
 --macro defold.support.ScriptMacro.use("..")
 -D luajit

@@ -1,3 +1,4 @@
+// TODO: these should be part of defold externs
 @:publicFields
 class Messages {
     // sys
