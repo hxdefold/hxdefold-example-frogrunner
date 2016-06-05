@@ -111,7 +111,7 @@ local _hx_exports = _G
 local Array = _hx_empty() local defold = {}
 defold.support = {}
 defold.support.Script = _hx_empty() local Coin = _hx_empty() local Controller = _hx_empty() local Date = _hx_empty() local Ground = _hx_empty() local Hero = _hx_empty() local Math = _hx_empty() local Messages = _hx_empty() local Platform = _hx_empty() local Reflect = _hx_empty() local String = _hx_empty() local Std = _hx_empty() local StringBuf = _hx_empty() defold._Message = {}
-defold._Message.Message_Impl_ = _hx_empty() local haxe = {}
+defold._Message.Message_Impl_ = _hx_empty() defold.DefoldMessages = _hx_empty() local haxe = {}
 haxe.ds = {}
 haxe.ds.ArraySort = _hx_empty() haxe.io = {}
 haxe.io.Eof = _hx_empty() local lua = {}
@@ -521,6 +521,7 @@ defold.support.Script.prototype = _hx_anon(
   'on_message', function(self,self,message_id,message,sender) 
   end,
   'on_input', function(self,self,action_id,action) 
+    do return false end
   end,
   'on_reload', function(self,self) 
   end
@@ -544,11 +545,11 @@ Coin.prototype = _hx_anon(
     data.collected = false;
   end,
   'on_message', function(self,data,message_id,message,sender) 
-    if (message_id) == Messages.CollisionResponse then 
+    if (message_id) == defold.DefoldMessages.CollisionResponse then 
       if (not data.collected) then 
         
         data.collected = true;
-        msg.post("#sprite",Messages.Disable);
+        msg.post("#sprite",defold.DefoldMessages.Disable);
       end;
     elseif (message_id) == Messages.StartAnimation then 
       
@@ -715,12 +716,12 @@ Hero.__name__ = true
 
 Hero.prototype = _hx_anon(
   'init', function(self,data) 
-    msg.post(".",Messages.AcquireInputFocus);
+    msg.post(".",defold.DefoldMessages.AcquireInputFocus);
     data.position = go.get_position();
     msg.post("#",Messages.Reset);
   end,
   'final', function(self,_) 
-    msg.post(".",Messages.ReleaseInputFocus);
+    msg.post(".",defold.DefoldMessages.ReleaseInputFocus);
   end,
   'update', function(self,data,dt) 
     local gravity = vmath.vector3(0,self.gravity,0);
@@ -769,11 +770,11 @@ Hero.prototype = _hx_anon(
     end;
   end,
   'on_message', function(self,data,message_id,message,sender) 
-    if (message_id) == Messages.ContactPointResponse then 
+    if (message_id) == defold.DefoldMessages.ContactPointResponse then 
       if ((message.group) == (_G.hash("danger"))) then 
         
         self:play_animation(data,_G.hash("die_right"));
-        msg.post("#collisionobject",Messages.Disable);
+        msg.post("#collisionobject",defold.DefoldMessages.Disable);
         go.animate(".","euler.z",go.PLAYBACK_ONCE_FORWARD,160,go.EASING_LINEAR,0.7);
         go.animate(".","position.y",go.PLAYBACK_ONCE_FORWARD,(go.get_position().y) - (200),go.EASING_INSINE,0.5,0.2,function() 
           msg.post("controller#script",Messages.Reset);
@@ -791,7 +792,7 @@ Hero.prototype = _hx_anon(
       data.anim = nil;
       go.set(".","euler.z",0);
       go.set_position(data.position);
-      msg.post("#collisionobject",Messages.Enable);
+      msg.post("#collisionobject",defold.DefoldMessages.Enable);
     end;
   end,
   'on_input', function(self,data,action_id,action) 
@@ -805,6 +806,7 @@ Hero.prototype = _hx_anon(
         end;
       end;
     end;
+    do return false end
   end,
   'jump', function(self,data) 
     if (data.ground_contact) then 
@@ -880,7 +882,7 @@ Platform.prototype = _hx_anon(
       _g1 = (_g1) + (1);
       local i = (_g1) - (1);
       local coin = factory.create("#coin_factory",vmath.vector3((x) + ((i) * (56)),(pos.y) + (64),1));
-      msg.post(coin,Messages.SetParent,_hx_o({__fields__={parent_id=true},parent_id=go.get_id()}));
+      msg.post(coin,defold.DefoldMessages.SetParent,_hx_o({__fields__={parent_id=true},parent_id=go.get_id()}));
       msg.post(coin,Messages.StartAnimation,_hx_o({__fields__={delay=true},delay=(i) / (10)}));
       _G.table.insert(data.coins,coin);
     
@@ -1107,6 +1109,10 @@ defold._Message.Message_Impl_._new = function(s)
   local this1 = _G.hash(s);
   do return this1 end;
 end
+
+
+defold.DefoldMessages.new = {}
+defold.DefoldMessages.__name__ = true
 
 
 haxe.ds.ArraySort.new = {}
@@ -1622,210 +1628,210 @@ Controller.grid = 460
 Controller.platform_heights = _hx_tab_array({[0]=100, 200, 350 }, 3)
 Controller.coins = 3
 Ground.pieces = _hx_tab_array({[0]="ground0", "ground1", "ground2", "ground3", "ground4", "ground5", "ground6" }, 7)
-Messages.Exit = (function() 
+Messages.StartAnimation = (function() 
   local _hx_1
   
-  local this1 = _G.hash("exit");
+  local this1 = _G.hash("start_animation");
   
   _hx_1 = this1;
   return _hx_1
 end )()
-Messages.Reboot = (function() 
+Messages.Reset = (function() 
   local _hx_2
   
-  local this1 = _G.hash("reboot");
+  local this1 = _G.hash("reset");
   
   _hx_2 = this1;
   return _hx_2
 end )()
-Messages.SetUpdateFrequency = (function() 
+Messages.DeleteSpawn = (function() 
   local _hx_3
   
-  local this1 = _G.hash("set_update_frequency");
+  local this1 = _G.hash("delete_spawn");
   
   _hx_3 = this1;
   return _hx_3
 end )()
-Messages.StartRecord = (function() 
+Messages.SetSpeed = (function() 
   local _hx_4
   
-  local this1 = _G.hash("start_record");
+  local this1 = _G.hash("set_speed");
   
   _hx_4 = this1;
   return _hx_4
 end )()
-Messages.StopRecord = (function() 
+Platform.CreateCoinsMessage = (function() 
   local _hx_5
   
-  local this1 = _G.hash("stop_record");
+  local this1 = _G.hash("create_coins");
   
   _hx_5 = this1;
   return _hx_5
 end )()
-Messages.ToggleProfile = (function() 
+defold.DefoldMessages.Exit = (function() 
   local _hx_6
   
-  local this1 = _G.hash("toggle_profile");
+  local this1 = _G.hash("exit");
   
   _hx_6 = this1;
   return _hx_6
 end )()
-Messages.AcquireInputFocus = (function() 
+defold.DefoldMessages.Reboot = (function() 
   local _hx_7
   
-  local this1 = _G.hash("acquire_input_focus");
+  local this1 = _G.hash("reboot");
   
   _hx_7 = this1;
   return _hx_7
 end )()
-Messages.Disable = (function() 
+defold.DefoldMessages.SetUpdateFrequency = (function() 
   local _hx_8
   
-  local this1 = _G.hash("disable");
+  local this1 = _G.hash("set_update_frequency");
   
   _hx_8 = this1;
   return _hx_8
 end )()
-Messages.Enable = (function() 
+defold.DefoldMessages.StartRecord = (function() 
   local _hx_9
   
-  local this1 = _G.hash("enable");
+  local this1 = _G.hash("start_record");
   
   _hx_9 = this1;
   return _hx_9
 end )()
-Messages.ReleaseInputFocus = (function() 
+defold.DefoldMessages.StopRecord = (function() 
   local _hx_10
   
-  local this1 = _G.hash("release_input_focus");
+  local this1 = _G.hash("stop_record");
   
   _hx_10 = this1;
   return _hx_10
 end )()
-Messages.SetParent = (function() 
+defold.DefoldMessages.ToggleProfile = (function() 
   local _hx_11
   
-  local this1 = _G.hash("set_parent");
+  local this1 = _G.hash("toggle_profile");
   
   _hx_11 = this1;
   return _hx_11
 end )()
-Messages.ApplyForce = (function() 
+defold.DefoldMessages.AcquireInputFocus = (function() 
   local _hx_12
   
-  local this1 = _G.hash("apply_force");
+  local this1 = _G.hash("acquire_input_focus");
   
   _hx_12 = this1;
   return _hx_12
 end )()
-Messages.CollisionResponse = (function() 
+defold.DefoldMessages.Disable = (function() 
   local _hx_13
   
-  local this1 = _G.hash("collision_response");
+  local this1 = _G.hash("disable");
   
   _hx_13 = this1;
   return _hx_13
 end )()
-Messages.ContactPointResponse = (function() 
+defold.DefoldMessages.Enable = (function() 
   local _hx_14
   
-  local this1 = _G.hash("contact_point_response");
+  local this1 = _G.hash("enable");
   
   _hx_14 = this1;
   return _hx_14
 end )()
-Messages.RayCastResponse = (function() 
+defold.DefoldMessages.ReleaseInputFocus = (function() 
   local _hx_15
   
-  local this1 = _G.hash("ray_cast_response");
+  local this1 = _G.hash("release_input_focus");
   
   _hx_15 = this1;
   return _hx_15
 end )()
-Messages.TriggerResponse = (function() 
+defold.DefoldMessages.SetParent = (function() 
   local _hx_16
   
-  local this1 = _G.hash("trigger_response");
+  local this1 = _G.hash("set_parent");
   
   _hx_16 = this1;
   return _hx_16
 end )()
-Messages.SpineAnimationDone = (function() 
+defold.DefoldMessages.ApplyForce = (function() 
   local _hx_17
   
-  local this1 = _G.hash("spine_animation_done");
+  local this1 = _G.hash("apply_force");
   
   _hx_17 = this1;
   return _hx_17
 end )()
-Messages.SpineEvent = (function() 
+defold.DefoldMessages.CollisionResponse = (function() 
   local _hx_18
   
-  local this1 = _G.hash("spine_event");
+  local this1 = _G.hash("collision_response");
   
   _hx_18 = this1;
   return _hx_18
 end )()
-Messages.AcquireCameraFocus = (function() 
+defold.DefoldMessages.ContactPointResponse = (function() 
   local _hx_19
   
-  local this1 = _G.hash("acquire_camera_focus");
+  local this1 = _G.hash("contact_point_response");
   
   _hx_19 = this1;
   return _hx_19
 end )()
-Messages.ReleaseCameraFocus = (function() 
+defold.DefoldMessages.RayCastResponse = (function() 
   local _hx_20
   
-  local this1 = _G.hash("release_camera_focus");
+  local this1 = _G.hash("ray_cast_response");
   
   _hx_20 = this1;
   return _hx_20
 end )()
-Messages.SetCamera = (function() 
+defold.DefoldMessages.TriggerResponse = (function() 
   local _hx_21
   
-  local this1 = _G.hash("set_camera");
+  local this1 = _G.hash("trigger_response");
   
   _hx_21 = this1;
   return _hx_21
 end )()
-Messages.StartAnimation = (function() 
+defold.DefoldMessages.SpineAnimationDone = (function() 
   local _hx_22
   
-  local this1 = _G.hash("start_animation");
+  local this1 = _G.hash("spine_animation_done");
   
   _hx_22 = this1;
   return _hx_22
 end )()
-Messages.Reset = (function() 
+defold.DefoldMessages.SpineEvent = (function() 
   local _hx_23
   
-  local this1 = _G.hash("reset");
+  local this1 = _G.hash("spine_event");
   
   _hx_23 = this1;
   return _hx_23
 end )()
-Messages.DeleteSpawn = (function() 
+defold.DefoldMessages.AcquireCameraFocus = (function() 
   local _hx_24
   
-  local this1 = _G.hash("delete_spawn");
+  local this1 = _G.hash("acquire_camera_focus");
   
   _hx_24 = this1;
   return _hx_24
 end )()
-Messages.SetSpeed = (function() 
+defold.DefoldMessages.ReleaseCameraFocus = (function() 
   local _hx_25
   
-  local this1 = _G.hash("set_speed");
+  local this1 = _G.hash("release_camera_focus");
   
   _hx_25 = this1;
   return _hx_25
 end )()
-Platform.CreateCoinsMessage = (function() 
+defold.DefoldMessages.SetCamera = (function() 
   local _hx_26
   
-  local this1 = _G.hash("create_coins");
+  local this1 = _G.hash("set_camera");
   
   _hx_26 = this1;
   return _hx_26

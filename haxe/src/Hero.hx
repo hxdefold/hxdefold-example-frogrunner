@@ -17,7 +17,7 @@ class Hero extends defold.support.Script<HeroData> {
 
     override function init(data:HeroData) {
         // this tells the engine to send input to on_input() in this script
-        Msg.post(".", Messages.AcquireInputFocus);
+        Msg.post(".", DefoldMessages.AcquireInputFocus);
 
         // save the starting position
         data.position = Go.get_position();
@@ -27,7 +27,7 @@ class Hero extends defold.support.Script<HeroData> {
 
     override function final(_) {
         // Return input focus when the object is deleted
-        Msg.post(".", Messages.ReleaseInputFocus);
+        Msg.post(".", DefoldMessages.ReleaseInputFocus);
     }
 
     override function update(data:HeroData, dt) {
@@ -94,12 +94,12 @@ class Hero extends defold.support.Script<HeroData> {
                 data.anim = null;
                 Go.set(".", "euler.z", 0);
                 Go.set_position(data.position);
-                Msg.post("#collisionobject", Messages.Enable);
-            case Messages.ContactPointResponse:
+                Msg.post("#collisionobject", DefoldMessages.Enable);
+            case DefoldMessages.ContactPointResponse:
                 // check if we received a contact point message. One message for each contact point
                 if (message.group == hash("danger")) {
                     play_animation(data, hash("die_right"));
-                    Msg.post("#collisionobject", Messages.Disable);
+                    Msg.post("#collisionobject", DefoldMessages.Disable);
                     Go.animate(".", "euler.z", PLAYBACK_ONCE_FORWARD, 160, Easing.EASING_LINEAR, 0.7);
                     Go.animate(".", "position.y", PLAYBACK_ONCE_FORWARD, Go.get_position().y - 200, Easing.EASING_INSINE, 0.5, 0.2,
                                function() Msg.post("controller#script", Messages.Reset));
@@ -116,6 +116,7 @@ class Hero extends defold.support.Script<HeroData> {
             else if (action.released)
                 abort_jump(data);
         }
+        return false;
     }
 
     function jump(data:HeroData) {
