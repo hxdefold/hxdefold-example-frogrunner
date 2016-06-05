@@ -70,8 +70,20 @@ class ScriptMacro {
                 var cl = script.cls;
 
                 // generate a name for the script
-                // TODO: allow configurable script names
-                var scriptName = cl.name.toLowerCase();
+                var scriptName = switch (cl.meta.extract(":defoldScript")) {
+                    case []:
+                        cl.name.toLowerCase();
+                    case [m]:
+                        switch (m.params) {
+                            case [{expr: EConst(CString(s))}]:
+                                s;
+                            default:
+                                throw new Error("Invalid @:defoldScript meta format! Should be @:defoldScript(\"name\")", m.pos);
+                        }
+                    default:
+                        throw new Error("Only single @:defoldScript meta is allowed", cl.pos);
+                }
+
                 var usedCl = usedScriptNames[scriptName];
                 if (usedCl != null) {
                     Context.warning('Location of previously defined script class with the name "$scriptName"', usedCl.pos);
