@@ -1836,6 +1836,14 @@ defold.DefoldMessages.SetCamera = (function()
   _hx_26 = this1;
   return _hx_26
 end )()
+defold.DefoldMessages.ClearColor = (function() 
+  local _hx_27
+  
+  local this1 = _G.hash("clear_color");
+  
+  _hx_27 = this1;
+  return _hx_27
+end )()
 lua.Boot.hiddenFields = _hx_tab_array({[0]="__id__", "hx__closures", "super", "prototype", "__fields__", "__ifields__", "__class__", "__properties__" }, 8)
 do
 
