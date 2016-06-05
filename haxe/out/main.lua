@@ -1623,101 +1623,149 @@ Controller.grid = 460
 Controller.platform_heights = _hx_tab_array({[0]=100, 200, 350 }, 3)
 Controller.coins = 3
 Ground.pieces = _hx_tab_array({[0]="ground0", "ground1", "ground2", "ground3", "ground4", "ground5", "ground6" }, 7)
-Messages.Enable = (function() 
+Messages.Exit = (function() 
   local _hx_1
   
-  local this1 = hash("enable");
+  local this1 = hash("exit");
   
   _hx_1 = this1;
   return _hx_1
 end )()
-Messages.Disable = (function() 
+Messages.Reboot = (function() 
   local _hx_2
   
-  local this1 = hash("disable");
+  local this1 = hash("reboot");
   
   _hx_2 = this1;
   return _hx_2
 end )()
-Messages.CollisionResponse = (function() 
+Messages.SetUpdateFrequency = (function() 
   local _hx_3
   
-  local this1 = hash("collision_response");
+  local this1 = hash("set_update_frequency");
   
   _hx_3 = this1;
   return _hx_3
 end )()
-Messages.StartAnimation = (function() 
+Messages.StartRecord = (function() 
   local _hx_4
   
-  local this1 = hash("start_animation");
+  local this1 = hash("start_record");
   
   _hx_4 = this1;
   return _hx_4
 end )()
-Messages.Reset = (function() 
+Messages.StopRecord = (function() 
   local _hx_5
   
-  local this1 = hash("reset");
+  local this1 = hash("stop_record");
   
   _hx_5 = this1;
   return _hx_5
 end )()
-Messages.DeleteSpawn = (function() 
+Messages.ToggleProfile = (function() 
   local _hx_6
   
-  local this1 = hash("delete_spawn");
+  local this1 = hash("toggle_profile");
   
   _hx_6 = this1;
   return _hx_6
 end )()
-Messages.SetSpeed = (function() 
+Messages.Enable = (function() 
   local _hx_7
   
-  local this1 = hash("set_speed");
+  local this1 = hash("enable");
   
   _hx_7 = this1;
   return _hx_7
 end )()
-Messages.ContactPointResponse = (function() 
+Messages.Disable = (function() 
   local _hx_8
   
-  local this1 = hash("contact_point_response");
+  local this1 = hash("disable");
   
   _hx_8 = this1;
   return _hx_8
 end )()
-Messages.AcquireInputFocus = (function() 
+Messages.CollisionResponse = (function() 
   local _hx_9
   
-  local this1 = hash("acquire_input_focus");
+  local this1 = hash("collision_response");
   
   _hx_9 = this1;
   return _hx_9
 end )()
-Messages.ReleaseInputFocus = (function() 
+Messages.StartAnimation = (function() 
   local _hx_10
   
-  local this1 = hash("release_input_focus");
+  local this1 = hash("start_animation");
   
   _hx_10 = this1;
   return _hx_10
 end )()
-Messages.SetParent = (function() 
+Messages.Reset = (function() 
   local _hx_11
   
-  local this1 = hash("set_parent");
+  local this1 = hash("reset");
   
   _hx_11 = this1;
   return _hx_11
 end )()
-Platform.CreateCoinsMessage = (function() 
+Messages.DeleteSpawn = (function() 
   local _hx_12
   
-  local this1 = hash("create_coins");
+  local this1 = hash("delete_spawn");
   
   _hx_12 = this1;
   return _hx_12
+end )()
+Messages.SetSpeed = (function() 
+  local _hx_13
+  
+  local this1 = hash("set_speed");
+  
+  _hx_13 = this1;
+  return _hx_13
+end )()
+Messages.ContactPointResponse = (function() 
+  local _hx_14
+  
+  local this1 = hash("contact_point_response");
+  
+  _hx_14 = this1;
+  return _hx_14
+end )()
+Messages.AcquireInputFocus = (function() 
+  local _hx_15
+  
+  local this1 = hash("acquire_input_focus");
+  
+  _hx_15 = this1;
+  return _hx_15
+end )()
+Messages.ReleaseInputFocus = (function() 
+  local _hx_16
+  
+  local this1 = hash("release_input_focus");
+  
+  _hx_16 = this1;
+  return _hx_16
+end )()
+Messages.SetParent = (function() 
+  local _hx_17
+  
+  local this1 = hash("set_parent");
+  
+  _hx_17 = this1;
+  return _hx_17
+end )()
+Platform.CreateCoinsMessage = (function() 
+  local _hx_18
+  
+  local this1 = hash("create_coins");
+  
+  _hx_18 = this1;
+  return _hx_18
 end )()
 lua.Boot.hiddenFields = _hx_tab_array({[0]="__id__", "hx__closures", "super", "prototype", "__fields__", "__ifields__", "__class__", "__properties__" }, 8)
 do
