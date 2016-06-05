@@ -51,9 +51,25 @@ class ScriptMacro {
             if (baseScriptMethods == null)
                 throw "No base Script class found!";
 
+            // keep track of used script names to prevent duplicates
+            var usedScriptNames = new Map();
+
             // generate scripts for our classes
             for (script in scriptClasses) {
                 var cl = script.cls;
+
+                // generate a name for the script
+                // TODO: allow configurable script names
+                var scriptName = cl.name.toLowerCase();
+                var usedCl = usedScriptNames[scriptName];
+                if (usedCl != null) {
+                    Context.warning('Location of previously defined script class with the name "$scriptName"', usedCl.pos);
+                    Context.error('Script name "$scriptName" is already used', cl.pos);
+                    return;
+                }
+
+                // mark that this class uses this script name
+                usedScriptNames[scriptName] = cl;
 
                 // expose the script, so it's visible to generated script
                 cl.meta.add(":expose", [], cl.pos);
@@ -101,8 +117,7 @@ class ScriptMacro {
                 }
 
                 // finally, save the generated script file, using the name of the class
-                // TODO: prevent duplicating classes, allow configurable script names, lowercase the default name
-                sys.io.File.saveContent('$outDir/${cl.name}.script', b.toString());
+                sys.io.File.saveContent('$outDir/$scriptName.script', b.toString());
             }
         });
     }
