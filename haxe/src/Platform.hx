@@ -17,7 +17,7 @@ class Platform extends Component<PlatformData> {
         var pos = Go.get_position();
         if (pos.x < -500)
             Msg.post("/level/controller#script", Messages.DeleteSpawn, {id: Go.get_id()});
-        pos.x -= data.speed;
+        pos.x = pos.x - data.speed;
         Go.set_position(pos);
     }
 

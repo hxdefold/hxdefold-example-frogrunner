@@ -14,7 +14,7 @@ class Ground extends Component<GroundData> {
             var pos = Go.get_position(p);
             if (pos.x <= -228)
                 pos.x = 1368 + (pos.x + 228);
-            pos.x -= data.speed;
+            pos.x = pos.x - data.speed;
             Go.set_position(pos, p);
         }
     }

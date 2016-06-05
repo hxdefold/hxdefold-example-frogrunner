@@ -681,11 +681,7 @@ Ground.prototype = _hx_anon(
       if ((pos.x) <= (-228)) then 
         pos.x = (1368) + (((pos.x) + (228)));
       end;
-      (function() return (function() 
-      local fld = 'x';
-      local obj = pos;
-      obj[fld] = (obj.x) - (data.speed);
-      return obj[fld] end)() end)();
+      pos.x = (pos.x) - (data.speed);
       go.set_position(pos,p);
     
     end;
@@ -862,11 +858,7 @@ Platform.prototype = _hx_anon(
     if ((pos.x) < (-500)) then 
       msg.post("/level/controller#script",Messages.DeleteSpawn,_hx_o({__fields__={id=true},id=go.get_id()}));
     end;
-    (function() return (function() 
-    local fld = 'x';
-    local obj = pos;
-    obj[fld] = (obj.x) - (data.speed);
-    return obj[fld] end)() end)();
+    pos.x = (pos.x) - (data.speed);
     go.set_position(pos);
   end,
   'on_message', function(self,data,message_id,message,sender) 

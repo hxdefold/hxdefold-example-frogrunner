@@ -66,7 +66,7 @@ class Hero extends Component<HeroData> {
         // (the correction vector is the 0-vector for the first contact point)
         var proj = Vmath.dot(data.correction, normal);
         // calculate the compensation we need to make for this contact point
-        var comp = normal * (distance - proj);
+        var comp = (distance - proj) * normal;
         // add it to the correction vector
         data.correction = data.correction + comp;
         // apply the compensation to the player character
