@@ -1,6 +1,6 @@
 components {
   id: "script"
-  component: "/haxe/out/scripts/hero.script"
+  component: "/scripts/Hero.script"
   position {
     x: 0.0
     y: 0.0

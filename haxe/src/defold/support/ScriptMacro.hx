@@ -10,7 +10,7 @@ using StringTools;
 using haxe.macro.Tools;
 
 class ScriptMacro {
-    static function use(defoldRoot:String) {
+    static function use(defoldRoot:String, outDir = "scripts") {
         var defoldRoot = sys.FileSystem.fullPath(defoldRoot).replace("\\", "/");
         if (!defoldRoot.endsWith("/"))
             defoldRoot += "/";
@@ -18,8 +18,7 @@ class ScriptMacro {
         if (!StringTools.startsWith(outFile, defoldRoot))
             throw "Haxe/Lua output file should be within defold project root: " + defoldRoot;
 
-        // the script directory will be relative to the main file
-        var outDir = Path.directory(outFile) + "/scripts";
+        outDir = Path.join([defoldRoot, outDir]);
 
         // determine the the module name for the "require" statement,
         // based on main lua file path relative to defold project root
@@ -62,37 +61,9 @@ class ScriptMacro {
             if (baseScriptMethods == null)
                 throw "No base Script class found!";
 
-            // keep track of used script names to prevent duplicates
-            var usedScriptNames = new Map();
-
             // generate scripts for our classes
             for (script in scriptClasses) {
                 var cl = script.cls;
-
-                // generate a name for the script
-                var scriptName = switch (cl.meta.extract(":defoldScript")) {
-                    case []:
-                        cl.name.toLowerCase();
-                    case [m]:
-                        switch (m.params) {
-                            case [{expr: EConst(CString(s))}]:
-                                s;
-                            default:
-                                throw new Error("Invalid @:defoldScript meta format! Should be @:defoldScript(\"name\")", m.pos);
-                        }
-                    default:
-                        throw new Error("Only single @:defoldScript meta is allowed", cl.pos);
-                }
-
-                var usedCl = usedScriptNames[scriptName];
-                if (usedCl != null) {
-                    Context.warning('Location of previously defined script class with the name "$scriptName"', usedCl.pos);
-                    Context.error('Script name "$scriptName" is already used', cl.pos);
-                    return;
-                }
-
-                // mark that this class uses this script name
-                usedScriptNames[scriptName] = cl;
 
                 // expose the script, so it's visible to generated script
                 cl.meta.add(":expose", [], cl.pos);
@@ -139,13 +110,17 @@ class ScriptMacro {
                 }
 
                 // finally, save the generated script file, using the name of the class
-                sys.io.File.saveContent('$outDir/$scriptName.script', b.toString());
+                var scriptDir = Path.join([outDir].concat(cl.pack));
+                sys.FileSystem.createDirectory(scriptDir);
+                sys.io.File.saveContent('$scriptDir/${cl.name}.script', b.toString());
             }
         });
     }
 
     // this should be in the standard library
     static function deleteRec(path:String) {
+        if (!sys.FileSystem.exists(path))
+            return;
         if (sys.FileSystem.isDirectory(path)) {
             for (file in sys.FileSystem.readDirectory(path))
                 deleteRec('$path/$file');
