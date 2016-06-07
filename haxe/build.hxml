@@ -1,6 +1,0 @@
--lib hxdefold
--cp src
--lua main.lua
---macro include("", true, null, ["src"])
---macro defold.support.ScriptMacro.use("..")
--D luajit
