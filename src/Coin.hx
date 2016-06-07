@@ -14,7 +14,7 @@ class Coin extends defold.support.Script<CoinData> {
                 Msg.post("#sprite", DefoldMessages.Disable);
             case Messages.StartAnimation:
                 var pos = Go.get_position();
-                Go.animate(Go.get_id(), "position.y", PLAYBACK_LOOP_PINGPONG, pos.y + 24, Easing.EASING_INOUTSINE, 0.75, message.delay);
+                Go.animate(Go.get_id(), "position.y", PLAYBACK_LOOP_PINGPONG, pos.y + 24, GoEasing.EASING_INOUTSINE, 0.75, message.delay);
         }
     }
 }

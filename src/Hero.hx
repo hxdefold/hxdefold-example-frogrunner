@@ -100,8 +100,8 @@ class Hero extends defold.support.Script<HeroData> {
                 if (message.group == hash("danger")) {
                     play_animation(data, hash("die_right"));
                     Msg.post("#collisionobject", DefoldMessages.Disable);
-                    Go.animate(".", "euler.z", PLAYBACK_ONCE_FORWARD, 160, Easing.EASING_LINEAR, 0.7);
-                    Go.animate(".", "position.y", PLAYBACK_ONCE_FORWARD, Go.get_position().y - 200, Easing.EASING_INSINE, 0.5, 0.2,
+                    Go.animate(".", "euler.z", PLAYBACK_ONCE_FORWARD, 160, GoEasing.EASING_LINEAR, 0.7);
+                    Go.animate(".", "position.y", PLAYBACK_ONCE_FORWARD, Go.get_position().y - 200, GoEasing.EASING_INSINE, 0.5, 0.2,
                                function() Msg.post("controller#script", Messages.Reset));
                 } else if (message.group == hash("geometry")) {
                     handle_geometry_contact(data, message.normal, message.distance);
