@@ -1,4 +1,4 @@
-import defold.support.InputAction;
+import defold.support.Script;
 
 typedef HeroData = {
     position:Vector3,
@@ -8,7 +8,7 @@ typedef HeroData = {
     anim:Hash,
 }
 
-class Hero extends defold.support.Script<HeroData> {
+class Hero extends Script<HeroData> {
     // gravity pulling the player down in pixel units/sˆ2
     var gravity = -20;
 
@@ -17,7 +17,7 @@ class Hero extends defold.support.Script<HeroData> {
 
     override function init(data:HeroData) {
         // this tells the engine to send input to on_input() in this script
-        Msg.post(".", DefoldMessages.AcquireInputFocus);
+        Msg.post(".", GoMessages.AcquireInputFocus);
 
         // save the starting position
         data.position = Go.get_position();
@@ -27,7 +27,7 @@ class Hero extends defold.support.Script<HeroData> {
 
     override function final(_) {
         // Return input focus when the object is deleted
-        Msg.post(".", DefoldMessages.ReleaseInputFocus);
+        Msg.post(".", GoMessages.ReleaseInputFocus);
     }
 
     override function update(data:HeroData, dt) {
@@ -94,12 +94,12 @@ class Hero extends defold.support.Script<HeroData> {
                 data.anim = null;
                 Go.set(".", "euler.z", 0);
                 Go.set_position(data.position);
-                Msg.post("#collisionobject", DefoldMessages.Enable);
-            case DefoldMessages.ContactPointResponse:
+                Msg.post("#collisionobject", GoMessages.Enable);
+            case PhysicsMessages.ContactPointResponse:
                 // check if we received a contact point message. One message for each contact point
                 if (message.group == hash("danger")) {
                     play_animation(data, hash("die_right"));
-                    Msg.post("#collisionobject", DefoldMessages.Disable);
+                    Msg.post("#collisionobject", GoMessages.Disable);
                     Go.animate(".", "euler.z", PLAYBACK_ONCE_FORWARD, 160, GoEasing.EASING_LINEAR, 0.7);
                     Go.animate(".", "position.y", PLAYBACK_ONCE_FORWARD, Go.get_position().y - 200, GoEasing.EASING_INSINE, 0.5, 0.2,
                                function() Msg.post("controller#script", Messages.Reset));
@@ -109,7 +109,7 @@ class Hero extends defold.support.Script<HeroData> {
         }
     }
 
-    override function on_input(data:HeroData, action_id:Hash, action:InputAction) {
+    override function on_input(data:HeroData, action_id:Hash, action:ScriptOnInputAction) {
         if (action_id == hash("jump") || action_id == hash("touch")) {
             if (action.pressed)
                 jump(data);
