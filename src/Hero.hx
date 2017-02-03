@@ -1,4 +1,5 @@
 import defold.support.Script;
+import defold.support.ScriptOnInputAction;
 
 typedef HeroData = {
     position:Vector3,
