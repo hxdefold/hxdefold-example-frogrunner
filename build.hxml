@@ -1,6 +1,7 @@
 -cp src
 -lua main.lua
 -D luajit
+-D analyzer-optimize
 -lib hxdefold
 --macro defold.support.ScriptMacro.use(".")
 --macro include("", true, null, ["src"])

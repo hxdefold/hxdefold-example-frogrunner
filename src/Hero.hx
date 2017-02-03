@@ -17,7 +17,7 @@ class Hero extends Script<HeroData> {
 
     override function init(data:HeroData) {
         // this tells the engine to send input to on_input() in this script
-        Msg.post(".", GoMessages.AcquireInputFocus);
+        Msg.post(".", GoMessages.acquire_input_focus);
 
         // save the starting position
         data.position = Go.get_position();
@@ -27,7 +27,7 @@ class Hero extends Script<HeroData> {
 
     override function final(_) {
         // Return input focus when the object is deleted
-        Msg.post(".", GoMessages.ReleaseInputFocus);
+        Msg.post(".", GoMessages.release_input_focus);
     }
 
     override function update(data:HeroData, dt) {
@@ -94,15 +94,15 @@ class Hero extends Script<HeroData> {
                 data.anim = null;
                 Go.set(".", "euler.z", 0);
                 Go.set_position(data.position);
-                Msg.post("#collisionobject", GoMessages.Enable);
-            case PhysicsMessages.ContactPointResponse:
+                Msg.post("#collisionobject", GoMessages.enable);
+            case PhysicsMessages.contact_point_response:
                 // check if we received a contact point message. One message for each contact point
                 if (message.group == hash("danger")) {
                     play_animation(data, hash("die_right"));
-                    Msg.post("#collisionobject", GoMessages.Disable);
+                    Msg.post("#collisionobject", GoMessages.disable);
                     Go.animate(".", "euler.z", PLAYBACK_ONCE_FORWARD, 160, GoEasing.EASING_LINEAR, 0.7);
                     Go.animate(".", "position.y", PLAYBACK_ONCE_FORWARD, Go.get_position().y - 200, GoEasing.EASING_INSINE, 0.5, 0.2,
-                               function() Msg.post("controller#script", Messages.Reset));
+                               function(_, _, _) Msg.post("controller#script", Messages.Reset));
                 } else if (message.group == hash("geometry")) {
                     handle_geometry_contact(data, message.normal, message.distance);
                 }

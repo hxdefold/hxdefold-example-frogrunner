@@ -38,7 +38,7 @@ class Platform extends defold.support.Script<PlatformData> {
         var x = pos.x - coins * (spacing * 0.5) - 24;
         for (i in 1...coins) {
             var coin = Factory.create("#coin_factory", Vmath.vector3(x + i * spacing , pos.y + 64, 1));
-            Msg.post(coin, GoMessages.SetParent, { parent_id: Go.get_id() });
+            Msg.post(coin, GoMessages.set_parent, { parent_id: Go.get_id() });
             Msg.post(coin, Messages.StartAnimation, { delay: i / 10 });
             lua.Table.insert(data.coins, coin);
         }

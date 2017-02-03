@@ -9,9 +9,9 @@ class Coin extends defold.support.Script<CoinData> {
 
     override function on_message<T>(data:CoinData, message_id:Message<T>, message:T, sender:Url):Void {
         switch (message_id) {
-            case PhysicsMessages.CollisionResponse if (!data.collected):
+            case PhysicsMessages.collision_response if (!data.collected):
                 data.collected = true;
-                Msg.post("#sprite", GoMessages.Disable);
+                Msg.post("#sprite", GoMessages.disable);
             case Messages.StartAnimation:
                 var pos = Go.get_position();
                 Go.animate(Go.get_id(), "position.y", PLAYBACK_LOOP_PINGPONG, pos.y + 24, GoEasing.EASING_INOUTSINE, 0.75, message.delay);
