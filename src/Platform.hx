@@ -9,7 +9,7 @@ class Platform extends defold.support.Script<PlatformData> {
         data.coins = lua.Table.create();
     }
 
-    override function final(data:PlatformData) {
+    override function final_(data:PlatformData) {
         lua.PairTools.ipairsEach(data.coins, function(i,p) Go.delete(p));
     }
 

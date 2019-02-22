@@ -26,7 +26,7 @@ class Hero extends Script<HeroData> {
         Msg.post("#", Messages.Reset);
     }
 
-    override function final(_) {
+    override function final_(_) {
         // Return input focus when the object is deleted
         Msg.post(".", GoMessages.release_input_focus);
     }

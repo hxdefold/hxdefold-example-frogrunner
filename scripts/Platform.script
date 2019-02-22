@@ -9,7 +9,7 @@ function init(data)
 end
 
 function final(data)
-	script:final(data)
+	script:final_(data)
 end
 
 function update(data, dt)
