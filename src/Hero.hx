@@ -98,13 +98,13 @@ class Hero extends Script<HeroData> {
                 Msg.post("#collisionobject", GoMessages.enable);
             case PhysicsMessages.contact_point_response:
                 // check if we received a contact point message. One message for each contact point
-                if (message.group == hash("danger")) {
+                if (message.other_group == hash("danger")) {
                     play_animation(data, hash("die_right"));
                     Msg.post("#collisionobject", GoMessages.disable);
                     Go.animate(".", "euler.z", PLAYBACK_ONCE_FORWARD, 160, GoEasing.EASING_LINEAR, 0.7);
                     Go.animate(".", "position.y", PLAYBACK_ONCE_FORWARD, Go.get_position().y - 200, GoEasing.EASING_INSINE, 0.5, 0.2,
                                function(_, _, _) Msg.post("controller#script", Messages.Reset));
-                } else if (message.group == hash("geometry")) {
+                } else if (message.other_group == hash("geometry")) {
                     handle_geometry_contact(data, message.normal, message.distance);
                 }
         }

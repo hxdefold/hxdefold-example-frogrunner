@@ -63,6 +63,7 @@ local Platform = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
 __defold_GoMessages = _hx_e()
+__defold_GuiMessages = _hx_e()
 __defold_PhysicsMessages = _hx_e()
 __defold_SpineMessages = _hx_e()
 __defold_types__Message_Message_Impl_ = _hx_e()
@@ -602,7 +603,7 @@ Hero.prototype.on_message = function(self,data,message_id,message,sender)
     _G.go.set_position(data.position);
     _G.msg.post("#collisionobject", __defold_GoMessages.enable);
   elseif (message_id) == __defold_PhysicsMessages.contact_point_response then 
-    if (message.group == _G.hash("danger")) then 
+    if (message.other_group == _G.hash("danger")) then 
       self:play_animation(data, _G.hash("die_right"));
       _G.msg.post("#collisionobject", __defold_GoMessages.disable);
       _G.go.animate(".", "euler.z", _G.go.PLAYBACK_ONCE_FORWARD, 160, _G.go.EASING_LINEAR, 0.7);
@@ -610,7 +611,7 @@ Hero.prototype.on_message = function(self,data,message_id,message,sender)
         _G.msg.post("controller#script", Messages.Reset);
       end);
     else
-      if (message.group == _G.hash("geometry")) then 
+      if (message.other_group == _G.hash("geometry")) then 
         self:handle_geometry_contact(data, message.normal, message.distance);
       end;
     end; end;
@@ -886,6 +887,8 @@ end
 
 __defold_GoMessages.new = {}
 
+__defold_GuiMessages.new = {}
+
 __defold_PhysicsMessages.new = {}
 
 __defold_SpineMessages.new = {}
@@ -1094,9 +1097,11 @@ local _hx_static_init = function()
   __defold_GoMessages.enable = _G.hash("enable");
   __defold_GoMessages.release_input_focus = _G.hash("release_input_focus");
   __defold_GoMessages.set_parent = _G.hash("set_parent");
+  __defold_GuiMessages.layout_changed = _G.hash("layout_changed");
   __defold_PhysicsMessages.apply_force = _G.hash("apply_force");
   __defold_PhysicsMessages.collision_response = _G.hash("collision_response");
   __defold_PhysicsMessages.contact_point_response = _G.hash("contact_point_response");
+  __defold_PhysicsMessages.ray_cast_missed = _G.hash("ray_cast_missed");
   __defold_PhysicsMessages.ray_cast_response = _G.hash("ray_cast_response");
   __defold_PhysicsMessages.request_velocity = _G.hash("request_velocity");
   __defold_PhysicsMessages.trigger_response = _G.hash("trigger_response");
